@@ -25,23 +25,40 @@ const BeeHummingBirdWrapper = styled.div`
 
 class BlogPostTemplate extends React.Component {
   state = {
-    fargelagteArk: {},
-    image: "dawg.jpg",
-    largeImage: "you-likes-dawg.jpg"
+    fargelagteArk: {}
   };
 
   componentDidMount() {
-    //I reinstate our localstorage = Wes#19 6:33
+    //const { params } = this.props.match;
+    // first reinstate our localStorage  = Wes#19 6:33
+    const localStorageRef = localStorage.getItem(
+      this.props.data.markdownRemark.frontmatter.title
+    );
+    if (localStorageRef) {
+      this.setState({ order: JSON.parse(localStorageRef) });
+    }
+
+    // var canvas = document.getElementById("canvas");
+    // let file = document.getElementById("file");
+    // const localStorageRef = localStorage.getItem();
+    // if (localStorageRef) {
+    //   this.setState({ fargelagteArk: JSON.parse(localStorageRef) });
+    // }
   }
 
   componentDidUpdate() {
-    console.log(this.state.coloringPages);
+    console.log(this.state.fargelagteArk);
+    // this.state.fargelagteArk
     localStorage.setItem(
       this.props.data.markdownRemark.frontmatter.title,
       JSON.stringify(this.state.fargelagteArk)
     );
   }
-  // Jeg vil at key skal være sidetall = Win!
+
+  // this.props.data.markdownRemark.frontmatter.title
+  // eller this.props.location line 86?
+  // The value is going to be this.state.fargelagteArk wes#19 4:10->
+  // kanskje jeg egentlig skal bruke this.addColoringPage ikke this.state.fargelagteArk?
 
   componentWillUnmount() {}
 
@@ -177,228 +194,5 @@ export const pageQuery = graphql`
     }
   }
 `;
-
-// import React from "react";
-// import { Link, graphql } from "gatsby";
-// import ReactDOM from "react-dom";
-// import Swipe from "react-easy-swipe";
-
-// // import Bio from "../components/bio"
-// import Layout from "../components/layout";
-// import SEO from "../components/seo";
-// import { rhythm, scale } from "../utils/typography";
-// import logo from "./uniparrot4.png";
-
-// class BlogPostTemplate extends React.Component {
-//   onSwipeStart(event) {
-//     console.log("Start swiping...", event);
-//   }
-
-//   onSwipeMove(position, event) {
-//     console.log(`Moved ${position.x} pixels horizontally`, event);
-//     console.log(`Moved ${position.y} pixels vertically`, event);
-//   }
-
-//   onSwipeEnd(event) {
-//     console.log("End swiping...", event);
-//   }
-
-//   render() {
-//     const post = this.props.data.markdownRemark;
-//     const siteTitle = this.props.data.site.siteMetadata.title;
-//     const { previous, next } = this.props.pageContext;
-
-//     return (
-//       <Swipe
-//         onSwipeStart={this.onSwipeStart}
-//         onSwipeMove={this.onSwipeMove}
-//         onSwipeEnd={this.onSwipeEnd}>
-//           <Link to={next.fields.slug} />
-//       </Swipe>
-//       <Layout location={this.props.location} title={siteTitle}>
-//         <SEO title={post.frontmatter.title} description={post.excerpt} />
-
-//         <p
-//           style={{
-//             ...scale(-1 / 5),
-//             display: `block`,
-//             marginBottom: rhythm(1),
-//             marginTop: rhythm(-1)
-//           }}
-//         />
-
-//         <ul
-//           style={{
-//             display: `flex`,
-//             flexWrap: `wrap`,
-//             justifyContent: `space-between`,
-//             listStyle: `none`,
-//             padding: 0
-//           }}
-//         >
-//           <li>
-//             {previous && (
-//               <Link to={previous.fields.slug} rel="prev">
-//                 ← {previous.frontmatter.title}
-//               </Link>
-//             )}
-//           </li>
-//           <li>
-//             {next && (
-//               <Link to={next.fields.slug} rel="next">
-//                 <img
-//                   style={{
-//                     width: "133px"
-//                   }}
-//                   src={logo}
-//                   alt="Geff Logo"
-//                 />
-//               </Link>
-//             )}
-//           </li>
-//         </ul>
-//         <div dangerouslySetInnerHTML={{ __html: post.html }} />
-//         <hr
-//           style={{
-//             marginBottom: rhythm(1)
-//           }}
-//         />
-//       </Layout>
-//     );
-//   }
-// }
-
-// export default BlogPostTemplate;
-
-// export const pageQuery = graphql`
-//   query BlogPostBySlug($slug: String!) {
-//     site {
-//       siteMetadata {
-//         title
-//         author
-//       }
-//     }
-//     markdownRemark(fields: { slug: { eq: $slug } }) {
-//       id
-//       excerpt(pruneLength: 160)
-//       html
-//       frontmatter {
-//         title
-//         date(formatString: "MMMM DD, YYYY")
-//       }
-//     }
-//   }
-// `;
-
-// .
-// import React from "react";
-// import { Link, graphql } from "gatsby";
-// import ReactDOM from "react-dom";
-// import Swipe from "react-easy-swipe";
-
-// // import Bio from "../components/bio"
-// import Layout from "../components/layout";
-// import SEO from "../components/seo";
-// import { rhythm, scale } from "../utils/typography";
-// import logo from "./uniparrot4.png";
-
-// class BlogPostTemplate extends React.Component {
-//   onSwipeStart(event) {
-//     console.log("Start swiping...", event);
-//   }
-
-//   onSwipeMove(position, event) {
-//     console.log(`Moved ${position.x} pixels horizontally`, event);
-//     console.log(`Moved ${position.y} pixels vertically`, event);
-//   }
-
-//   onSwipeEnd(event) {
-//     console.log("End swiping...", event);
-//   }
-
-//   render() {
-//     const post = this.props.data.markdownRemark;
-//     const siteTitle = this.props.data.site.siteMetadata.title;
-//     const { previous, next } = this.props.pageContext;
-
-//     return (
-//       <Swipe
-//         onSwipeStart={this.onSwipeStart}
-//         onSwipeMove={this.onSwipeMove}
-//         onSwipeEnd={this.onSwipeEnd}>
-//           <Link to={next.fields.slug} />
-//       </Swipe>
-//       <Layout location={this.props.location} title={siteTitle}>
-//         <SEO title={post.frontmatter.title} description={post.excerpt} />
-
-//         <p
-//           style={{
-//             ...scale(-1 / 5),
-//             display: `block`,
-//             marginBottom: rhythm(1),
-//             marginTop: rhythm(-1)
-//           }}
-//         />
-
-//         <ul
-//           style={{
-//             display: `flex`,
-//             flexWrap: `wrap`,
-//             justifyContent: `space-between`,
-//             listStyle: `none`,
-//             padding: 0
-//           }}
-//         >
-//           <li>
-//             {previous && (
-//               <Link to={previous.fields.slug} rel="prev">
-//                 ← {previous.frontmatter.title}
-//               </Link>
-//             )}
-//           </li>
-//           <li>
-//             {next && (
-//               <Link to={next.fields.slug} rel="next">
-//                 <img
-//                   style={{
-//                     width: "133px"
-//                   }}
-//                   src={logo}
-//                   alt="Geff Logo"
-//                 />
-//               </Link>
-//             )}
-//           </li>
-//         </ul>
-//         <div dangerouslySetInnerHTML={{ __html: post.html }} />
-//         <hr
-//           style={{
-//             marginBottom: rhythm(1)
-//           }}
-//         />
-//       </Layout>
-//     );
-//   }
-// }
-
-// export default BlogPostTemplate;
-
-// export const pageQuery = graphql`
-//   query BlogPostBySlug($slug: String!) {
-//     site {
-//       siteMetadata {
-//         title
-//         author
-//       }
-//     }
-//     markdownRemark(fields: { slug: { eq: $slug } }) {
-//       id
-//       excerpt(pruneLength: 160)
-//       html
-//       frontmatter {
-//         title
-//         date(formatString: "MMMM DD, YYYY")
-//       }
-//     }
-//   }
-// `;
+// Vi bør vise brukerns bilder når component mounts fra wesSickFitsBos
+// i localStorage vil jeg ha fargelagteArk fra et spesifikt sidetall. -at key skal være sidetall = Win!
