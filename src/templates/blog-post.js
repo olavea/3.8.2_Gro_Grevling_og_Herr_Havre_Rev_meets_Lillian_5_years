@@ -1,7 +1,12 @@
 import React from "react";
-import AddKidsToyAnimalForm from "../components/AddKidsToyAnimalForm";
-import { Link, graphql } from "gatsby";
 
+import Inventory from "../components/Inventory";
+import fishes from "../sample-fishes";
+import Fish from "../components/Fish";
+import Header from "../components/Header";
+
+import { Link, graphql } from "gatsby";
+// import AddKidsToyAnimalForm from "../components/AddKidsToyAnimalForm";
 // import Bio from "../components/bio"
 import Layout from "../components/layout";
 import SEO from "../components/seo";
@@ -25,7 +30,8 @@ const BeeHummingBirdWrapper = styled.div`
 
 class BlogPostTemplate extends React.Component {
   state = {
-    fargelagteArk: {}
+    fargelagteArk: {},
+    order: {}
   };
 
   componentDidMount() {
@@ -34,31 +40,21 @@ class BlogPostTemplate extends React.Component {
     const localStorageRef = localStorage.getItem(
       this.props.data.markdownRemark.frontmatter.title
     );
+    console.log("res");
     if (localStorageRef) {
-      this.setState({ order: JSON.parse(localStorageRef) });
+      this.setState({ fargelagteArk: JSON.parse(localStorageRef) });
     }
-
-    // var canvas = document.getElementById("canvas");
-    // let file = document.getElementById("file");
-    // const localStorageRef = localStorage.getItem();
-    // if (localStorageRef) {
-    //   this.setState({ fargelagteArk: JSON.parse(localStorageRef) });
-    // }
+    console.log("resto");
   }
 
   componentDidUpdate() {
     console.log(this.state.fargelagteArk);
-    // this.state.fargelagteArk
+
     localStorage.setItem(
       this.props.data.markdownRemark.frontmatter.title,
       JSON.stringify(this.state.fargelagteArk)
     );
   }
-
-  // this.props.data.markdownRemark.frontmatter.title
-  // eller this.props.location line 86?
-  // The value is going to be this.state.fargelagteArk wes#19 4:10->
-  // kanskje jeg egentlig skal bruke this.addColoringPage ikke this.state.fargelagteArk?
 
   componentWillUnmount() {}
 
@@ -69,6 +65,19 @@ class BlogPostTemplate extends React.Component {
     fargelagteArk[`toyAnimal${Date.now()}`] = toyAnimal;
     /// III. set den nye fargeleggings objektet til state
     this.setState({ fargelagteArk });
+  };
+
+  loadSampleFishes = () => {
+    this.setState({ fargelagteArk: fishes });
+  };
+
+  addToOrder = key => {
+    // 1. take a copy of state
+    const order = { ...this.state.order };
+    // 2. Either add to the order, or update the number in our order
+    order[key] = order[key] + 1 || 1;
+    // 3. Call setState to update our state object
+    this.setState({ order });
   };
 
   render() {
@@ -115,6 +124,11 @@ class BlogPostTemplate extends React.Component {
             </li>
           </ul>
           <div dangerouslySetInnerHTML={{ __html: post.html }} />
+          <div classname="menu">
+            <Header tagline="Lillian" />
+          </div>
+          <ul className="uploaded-drawings" />
+
           <ul
             style={{
               display: `flex`,
@@ -126,10 +140,30 @@ class BlogPostTemplate extends React.Component {
             }}
           >
             <li>
-              <AddKidsToyAnimalForm addColoringPage={this.addColoringPage} />
+              <Inventory
+                addColoringPage={this.addColoringPage}
+                loadSampleFishes={this.loadSampleFishes}
+              />
               {/*// 33. look at page 11*/}
             </li>
           </ul>
+          <div className="menu">
+            {/*  <Header tagline="Lillian's Drawings" />
+          {Object.keys(this.state.fargelagteArk).map(key => (
+            <Fish key={key} details={this.state.fargelagteArk[key]} />
+          ))}
+          */}
+            <ul className="fishes">
+              {Object.keys(this.state.fargelagteArk).map(key => (
+                <Fish
+                  key={key}
+                  index={key}
+                  details={this.state.fargelagteArk[key]}
+                  addToOrder={this.addToOrder}
+                />
+              ))}
+            </ul>
+          </div>
           <ul
             style={{
               display: `flex`,

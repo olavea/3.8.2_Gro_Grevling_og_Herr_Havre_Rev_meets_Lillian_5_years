@@ -7,12 +7,14 @@ class AddKidsToyAnimalForm extends React.Component {
 
   createToy = event => {
     event.preventDefault();
-
+    // II get the text from that input
+    // declare a property which is bound to the instance Wes#11
     const toyAnimal = {
       name: this.nameRef.current.value,
       image: this.imageRef.current.value,
       file: this.fileRef.current.value
     };
+    // What is this line below doing? Wes#XX
     this.props.addColoringPage(toyAnimal);
     //refresh the form
     event.currentTarget.reset();
@@ -20,14 +22,14 @@ class AddKidsToyAnimalForm extends React.Component {
 
   render() {
     return (
-      <form className="toyAnimal-edit" onSubmit={this.createToy}>
+      <form className="tegning-edit" onSubmit={this.createToy}>
         <input
           name="name"
           ref={this.nameRef}
           type="text"
           placeholder="Name of Your Kids Fav Toy Animal"
         />
-        Image
+
         <input
           name="file"
           ref={this.fileRef}
