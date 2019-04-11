@@ -68,6 +68,16 @@ module.exports = {
         icon: `content/assets/Young_Beatrix_Potter.jpg`
       }
     },
+    // {
+    //   resolve: "gatsby-source-google-sheets",
+    //   options: {
+    //     spreadsheetId:
+    //       "https://docs.google.com/spreadsheets/d/18Dg3dDhGFnnHZGCr2azbYRU8iIj50zjsvCkdFlReHT4/edit?usp=sharing",
+    //     worksheetTitle: "ie the name in the worksheet tab",
+    //     credentials: require("./client_secret.json")
+    //   }
+    // },
+
     `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-styled-components`,
