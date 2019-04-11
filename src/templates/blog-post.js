@@ -84,6 +84,7 @@ class BlogPostTemplate extends React.Component {
     const post = this.props.data.markdownRemark;
     const siteTitle = this.props.data.site.siteMetadata.title;
     const { previous, next } = this.props.pageContext;
+    const onPage = this.props.pageContext;
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
@@ -127,7 +128,6 @@ class BlogPostTemplate extends React.Component {
           <div classname="menu">
             <Header tagline="Lillian" />
           </div>
-          <ul className="uploaded-drawings" />
 
           <ul
             style={{
@@ -144,7 +144,6 @@ class BlogPostTemplate extends React.Component {
                 addColoringPage={this.addColoringPage}
                 loadSampleFishes={this.loadSampleFishes}
               />
-              {/*// 33. look at page 11*/}
             </li>
           </ul>
           <div className="menu">
@@ -153,6 +152,7 @@ class BlogPostTemplate extends React.Component {
             <Fish key={key} details={this.state.fargelagteArk[key]} />
           ))}
           */}
+            {/* onPage bruk bare tegninger som hører til den siden vi er på, så kan barna sende inn sin tegning med navnet sitt, sidetall og en fil og ha dem liggende inni samples */}
             <ul className="fishes">
               {Object.keys(this.state.fargelagteArk).map(key => (
                 <Fish
