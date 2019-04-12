@@ -5,11 +5,8 @@ class Inventory extends React.Component {
   render() {
     return (
       <div className="order-wrap">
-        <h2>Inventory</h2>
         <AddKidsToyAnimalForm addColoringPage={this.props.addColoringPage} />
-        <button onClick={this.props.loadSampleFishes}>
-          Load Sample Fishes
-        </button>
+        <button onClick={this.props.loadSampleFishes}>Se våre tegninger</button>
       </div>
     );
   }
