@@ -27,7 +27,7 @@ class AddKidsToyAnimalForm extends React.Component {
           name="name"
           ref={this.nameRef}
           type="text"
-          placeholder="Name of Your Kids Fav Toy Animal"
+          placeholder="Barnets navn"
         />
 
         <input
@@ -42,9 +42,7 @@ class AddKidsToyAnimalForm extends React.Component {
           type="text"
           placeholder="Ta bilde av fargelegging"
         />
-        <button type="submit">
-          + Legg til barnets fargelegging på denne siden
-        </button>
+        <button type="submit">+ Legg til barnets tegning på denne siden</button>
       </form>
     );
   }
